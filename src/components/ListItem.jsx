@@ -4,6 +4,7 @@ import axios from "axios";
 function ListItem(props) {
   const [done, setDone] = useState(false);
   const [show, setShow] = useState(false);
+  const [value, setValue] = useState();
   const checked = () => {
     setDone(!done);
   };
@@ -13,10 +14,12 @@ function ListItem(props) {
   };
   const updateText = () => {
     setShow(!show);
-    // axios.put(`http://localhost:5000/list/${props.data._id}`, {
-    //   todo: value,
-    // });
-    // window.location.reload(true);
+  };
+  const save = () => {
+    axios.put(`http://localhost:5000/list/${props.data._id}`, {
+      todo: value,
+    });
+    window.location.reload(true);
   };
   return (
     <div className="w-full h-[40px] mb-1 border-b-[1px] text-[16px] font-[500] text-gray-600 flex justify-between">
@@ -44,11 +47,19 @@ function ListItem(props) {
               autoFocus
               autoCorrect="off"
               spellCheck="false"
+              onChange={(e) => {
+                setValue(e.target.value);
+              }}
             />
           </>
         ) : null}
       </div>
       <div className="flex">
+        {show ? (
+          <button onClick={save} className="mr-2 text-lg">
+            +
+          </button>
+        ) : null}
         <button onClick={updateText}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

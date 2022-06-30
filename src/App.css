@@ -1,0 +1,10 @@
+.input:focus {
+  outline: none;
+}
+#done {
+  text-decoration-line: line-through;
+}
+.icon-check {
+  background-color: #8500ff;
+  border-radius: 50%;
+}
